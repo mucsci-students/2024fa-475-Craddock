@@ -48,12 +48,12 @@ public class InputController : MonoBehaviour
                 screenTap = true;
                 break;
             }
-            else if ((t.phase == TouchPhase.Began) && t.position.y < Screen.height * 0.055f)
+            else if ((t.phase == TouchPhase.Began) && t.position.y < Screen.height * 0.095f)
             {
                 Stop ();
             }
         }
-        if (Input.GetMouseButtonDown (0) && Input.mousePosition.y < Screen.height * 0.055f)
+        if (Input.GetMouseButtonDown (0) && Input.mousePosition.y < Screen.height * 0.095f)
             Stop ();
         if (currIndex >= 0 && (Input.GetKeyDown (KeyCode.Space) || screenTap))
         {
