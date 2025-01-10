@@ -1,3 +1,13 @@
+/*
+    The SheetMusicController script is attached to the sheet music controller GameObject. It generates and moves
+    the music notes across the screen.
+
+    The WriteNextBar() method randomly generates a new bar based on the current 'phase', which increases as the player's score increases.
+    More difficult methods of generation are used as the phase increases.
+    
+    The CreateBar() method uses the generated bar to instantiate the actual music notes that the player sees on screen.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,259 +47,259 @@ public class SheetMusicController : MonoBehaviour
     private void WriteNextBar ()
     {
         List<bool> bar = Enumerable.Repeat(false, 48).ToList();
-switch (phase)
-{
-    case 0:
-    {
-        /*
-        bar[0] = bar[3] = bar[6] = bar[9] = true;
-        bar[12] = bar[15] = bar[18] = bar[21] = true;
-        bar[24] = bar[27] = bar[30] = bar[33] = true;
-        bar[36] = bar[39] = bar[42] = bar[45] = true;
-        */
-        bar[0] = bar[12] = bar[24] = bar[36] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 1:
-    {
-        bar[0] = bar[12] = bar[36] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 2:
-    {
-        bar[0] = bar[12] = bar[24] = bar[36] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 3:
-    {
-        bar[0] = bar[12] = bar[36] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 4: // 5 score
-    {
-        bar[0] = bar[12] = bar[24] = bar[36] = true;
-        bar[Random.Range(0, 4) * 12] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 5:
-    {
-        bar[0] = bar[12] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 6: // 10 score
-    {
-        bar[0] = bar[12] = bar[24] = bar[36] = true;
-        bar[Random.Range(0, 4) * 12] = false;
-        bar[Random.Range(0, 4) * 12] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 8:
-    {
-        bar[0] = bar[6] = bar[24] = bar[30] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 9:
-    {
-        bar[0] = bar[12] = bar[18] = bar[24] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 10:
-    {
-        bar[0] = bar[6] = bar[24] = bar[30] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 11:
-    {
-        bar[0] = bar[12] = bar[18] = bar[24] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 12: // 20 score
-    {
-        for (int i = 0; i < 8; ++i) bar[i * 6] = true;
-        bar[Random.Range(0, 4) * 12 + 6] = false;
-        bar[Random.Range(0, 4) * 12 + 6] = false;
-        int j = Random.Range(0, 4);
-        bar[j * 12] = bar[j * 12 + 6] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 13:
-    {
-        bar[0] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 14:
-    {
-        bar[0] = bar[6] = bar[18] = bar[24] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 15:
-    {
-        bar[0] = bar[6] = bar[18] = bar[24] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 16:
-    {
-        bar[0] = bar[18] = bar[24] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 17:
-    {
-        bar[0] = bar[18] = bar[24] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 18:
-    {
-        bar[0] = bar[6] = bar[18] = bar[30] = bar[42] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 19: // 40 score
-    {
-        for (int i = 0; i < 8; ++i) bar[i * 6] = true;
-        for (int i = 0; i < 4; ++i) bar[Random.Range (0, 8) * 6] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 21:
-    {
-        bar[0] = bar[12] = bar[18] = bar[24] = bar[27] = bar[30] = bar[33] = bar[36] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 22:
-    {
-        bar[0] = bar[12] = bar[18] = bar[24] = bar[27] = bar[30] = bar[33] = bar[36] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 23: // 50 score
-    {
-        for (int i = 0; i < 8; ++i) bar[i * 6] = true;
-        for (int i = 0; i < 4; ++i) bar[Random.Range (0, 8) * 6] = false;
-        if (Random.Range (0, 2) == 0)
+        switch (phase)
         {
-            int j = Random.Range (0, 4);
-            for (int i = 0; i < 4; ++i)
-                bar[i * 3 + j * 12] = true;
+            case 0:
+            {
+                /*
+                bar[0] = bar[3] = bar[6] = bar[9] = true;
+                bar[12] = bar[15] = bar[18] = bar[21] = true;
+                bar[24] = bar[27] = bar[30] = bar[33] = true;
+                bar[36] = bar[39] = bar[42] = bar[45] = true;
+                */
+                bar[0] = bar[12] = bar[24] = bar[36] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 1:
+            {
+                bar[0] = bar[12] = bar[36] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 2:
+            {
+                bar[0] = bar[12] = bar[24] = bar[36] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 3:
+            {
+                bar[0] = bar[12] = bar[36] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 4: // 5 score
+            {
+                bar[0] = bar[12] = bar[24] = bar[36] = true;
+                bar[Random.Range(0, 4) * 12] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 5:
+            {
+                bar[0] = bar[12] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 6: // 10 score
+            {
+                bar[0] = bar[12] = bar[24] = bar[36] = true;
+                bar[Random.Range(0, 4) * 12] = false;
+                bar[Random.Range(0, 4) * 12] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 8:
+            {
+                bar[0] = bar[6] = bar[24] = bar[30] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 9:
+            {
+                bar[0] = bar[12] = bar[18] = bar[24] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 10:
+            {
+                bar[0] = bar[6] = bar[24] = bar[30] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 11:
+            {
+                bar[0] = bar[12] = bar[18] = bar[24] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 12: // 20 score
+            {
+                for (int i = 0; i < 8; ++i) bar[i * 6] = true;
+                bar[Random.Range(0, 4) * 12 + 6] = false;
+                bar[Random.Range(0, 4) * 12 + 6] = false;
+                int j = Random.Range(0, 4);
+                bar[j * 12] = bar[j * 12 + 6] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 13:
+            {
+                bar[0] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 14:
+            {
+                bar[0] = bar[6] = bar[18] = bar[24] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 15:
+            {
+                bar[0] = bar[6] = bar[18] = bar[24] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 16:
+            {
+                bar[0] = bar[18] = bar[24] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 17:
+            {
+                bar[0] = bar[18] = bar[24] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 18:
+            {
+                bar[0] = bar[6] = bar[18] = bar[30] = bar[42] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 19: // 40 score
+            {
+                for (int i = 0; i < 8; ++i) bar[i * 6] = true;
+                for (int i = 0; i < 4; ++i) bar[Random.Range (0, 8) * 6] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 21:
+            {
+                bar[0] = bar[12] = bar[18] = bar[24] = bar[27] = bar[30] = bar[33] = bar[36] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 22:
+            {
+                bar[0] = bar[12] = bar[18] = bar[24] = bar[27] = bar[30] = bar[33] = bar[36] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 23: // 50 score
+            {
+                for (int i = 0; i < 8; ++i) bar[i * 6] = true;
+                for (int i = 0; i < 4; ++i) bar[Random.Range (0, 8) * 6] = false;
+                if (Random.Range (0, 2) == 0)
+                {
+                    int j = Random.Range (0, 4);
+                    for (int i = 0; i < 4; ++i)
+                        bar[i * 3 + j * 12] = true;
+                }
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 24:
+            {
+                bar[0] = bar[6] = bar[12] = bar[18] = bar[21] = bar[24] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 25: // 65 score
+            {
+                for (int l = 0; l < 8; ++l) bar[l * 6] = true;
+                bar[Random.Range (0, 4) * 12 + 6] = false;
+                int i = Random.Range (0, 4);
+                bar[i * 12] = bar[i * 12 + 6] = false;
+                int j = Random.Range (0, 4);
+                for (int k = 0; k < 4; ++k)
+                    bar[k * 3 + j * 12] = true;
+                if (Random.Range (0, 2) == 0)
+                    bar[3 + j * 12] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 26:
+            {
+                bar[0] = bar[3] = bar[6] = bar[9] = bar[12] = bar[15] = bar[18] = bar[24] = bar[27] = bar[30] = bar[36] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 27: // 80 score
+            {
+                for (int l = 0; l < 8; ++l) bar[l * 6] = true;
+                bar[Random.Range (0, 4) * 12 + 6] = false;
+                int i = Random.Range (0, 4);
+                bar[i * 12] = bar[i * 12 + 6] = false;
+                int j = Random.Range (0, 4);
+                for (int k = 0; k < 4; ++k)
+                    bar[k * 3 + j * 12] = true;
+                if (Random.Range (0, 2) == 0)
+                    bar[9 + j * 12] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 28:
+            {
+                bar[0] = bar[6] = bar[12] = bar[24] = bar[27] = bar[33] = bar[36] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 29: // 95 score
+            {
+                for (int l = 0; l < 8; ++l) bar[l * 6] = true;
+                bar[Random.Range (0, 4) * 12 + 6] = false;
+                int i = Random.Range (0, 4);
+                bar[i * 12] = bar[i * 12 + 6] = false;
+                int j = Random.Range (0, 4);
+                for (int k = 0; k < 4; ++k)
+                    bar[k * 3 + j * 12] = true;
+                if (Random.Range (0, 2) == 0)
+                    bar[9 + j * 12] = false;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 30:
+            {
+                bar[0] = bar[3] = bar[6] = bar[9] = true;
+                bar[12] = bar[18] = bar[21] = true;
+                bar[24] = bar[27] = bar[33] = true;
+                bar[36] = bar[39] = bar[42] = true;
+                isTutorialPhase.Add(true);
+                break;
+            }
+            case 31:
+            {
+                bar[0] = bar[3] = bar[6] = bar[9] = true;
+                bar[12] = bar[18] = bar[21] = true;
+                bar[24] = bar[27] = bar[33] = true;
+                bar[36] = bar[39] = bar[42] = true;
+                isTutorialPhase.Add(false);
+                break;
+            }
+            case 32: // 120 score
+            {
+                for (int i = 0; i < 8; ++i) bar[i * 6] = true;
+                for (int i = 0; i < 4; ++i) bar[Random.Range (0, 8) * 6] = false;
+                if (Random.Range (0, 2) == 0)
+                {
+                    int j = Random.Range (0, 4);
+                    for (int i = 0; i < 4; ++i)
+                        bar[i * 3 + j * 12] = true;
+                    bar[3 * Random.Range (0, 4) + j * 12] = false;
+                }
+                isTutorialPhase.Add(false);
+                break;
+            }
+            default:
+            {
+                isTutorialPhase.Add(false);
+                break;
+            }
         }
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 24:
-    {
-        bar[0] = bar[6] = bar[12] = bar[18] = bar[21] = bar[24] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 25: // 65 score
-    {
-        for (int l = 0; l < 8; ++l) bar[l * 6] = true;
-        bar[Random.Range (0, 4) * 12 + 6] = false;
-        int i = Random.Range (0, 4);
-        bar[i * 12] = bar[i * 12 + 6] = false;
-        int j = Random.Range (0, 4);
-        for (int k = 0; k < 4; ++k)
-            bar[k * 3 + j * 12] = true;
-        if (Random.Range (0, 2) == 0)
-            bar[3 + j * 12] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 26:
-    {
-        bar[0] = bar[3] = bar[6] = bar[9] = bar[12] = bar[15] = bar[18] = bar[24] = bar[27] = bar[30] = bar[36] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 27: // 80 score
-    {
-        for (int l = 0; l < 8; ++l) bar[l * 6] = true;
-        bar[Random.Range (0, 4) * 12 + 6] = false;
-        int i = Random.Range (0, 4);
-        bar[i * 12] = bar[i * 12 + 6] = false;
-        int j = Random.Range (0, 4);
-        for (int k = 0; k < 4; ++k)
-            bar[k * 3 + j * 12] = true;
-        if (Random.Range (0, 2) == 0)
-            bar[9 + j * 12] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 28:
-    {
-        bar[0] = bar[6] = bar[12] = bar[24] = bar[27] = bar[33] = bar[36] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 29: // 95 score
-    {
-        for (int l = 0; l < 8; ++l) bar[l * 6] = true;
-        bar[Random.Range (0, 4) * 12 + 6] = false;
-        int i = Random.Range (0, 4);
-        bar[i * 12] = bar[i * 12 + 6] = false;
-        int j = Random.Range (0, 4);
-        for (int k = 0; k < 4; ++k)
-            bar[k * 3 + j * 12] = true;
-        if (Random.Range (0, 2) == 0)
-            bar[9 + j * 12] = false;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 30:
-    {
-        bar[0] = bar[3] = bar[6] = bar[9] = true;
-        bar[12] = bar[18] = bar[21] = true;
-        bar[24] = bar[27] = bar[33] = true;
-        bar[36] = bar[39] = bar[42] = true;
-        isTutorialPhase.Add(true);
-        break;
-    }
-    case 31:
-    {
-        bar[0] = bar[3] = bar[6] = bar[9] = true;
-        bar[12] = bar[18] = bar[21] = true;
-        bar[24] = bar[27] = bar[33] = true;
-        bar[36] = bar[39] = bar[42] = true;
-        isTutorialPhase.Add(false);
-        break;
-    }
-    case 32: // 120 score
-    {
-        for (int i = 0; i < 8; ++i) bar[i * 6] = true;
-        for (int i = 0; i < 4; ++i) bar[Random.Range (0, 8) * 6] = false;
-        if (Random.Range (0, 2) == 0)
-        {
-            int j = Random.Range (0, 4);
-            for (int i = 0; i < 4; ++i)
-                bar[i * 3 + j * 12] = true;
-            bar[3 * Random.Range (0, 4) + j * 12] = false;
-        }
-        isTutorialPhase.Add(false);
-        break;
-    }
-    default:
-    {
-        isTutorialPhase.Add(false);
-        break;
-    }
-}
 
         if (met.score >= scoreOfNextPhase[phase])
             ++phase;
@@ -306,7 +316,7 @@ switch (phase)
         for (phase = 0; phase < scoreOfNextPhase.Count; ++phase)
             if (met.score <= scoreOfNextPhase[phase])
                 break;
-        print ("phase: " + phase);
+        print ("phase: " + phase); //debug
     }
 
     public void Stop ()

@@ -1,3 +1,10 @@
+/*
+    The InputController class detects when the player taps the screen / presses the space bar and
+    tells the current MusicNote that it's been hit.
+
+    It also stops the game if the player taps near the bottom of the screen.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,7 +62,7 @@ public class InputController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown (0) && Input.mousePosition.y < Screen.height * 0.095f)
             Stop ();
-        if (currIndex >= 0 && (Input.GetKeyDown (KeyCode.Space) || screenTap))
+        else if (currIndex >= 0 && (Input.GetKeyDown (KeyCode.Space) || screenTap))
         {
             notes[currIndex].Hit (met.note + offset);
         }

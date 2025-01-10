@@ -1,3 +1,16 @@
+/*
+    The MusicNote script is attached to every music note that gets created.
+    
+    Every MusicNote has a 'notes' variable that represents either a one, two, or four beat long rhythm. When the MusicNote is created,
+    it converts that rhythm into a list of times when each beat should be hit.
+
+    The MusicNote class makes the music note pulse in time with its rhythm, and gives the player feedback when they tap the screen
+    by playing a different sound and animation depending on how accurately they hit it. It also updates the player's score based on
+    how close their hit was to one of the correct times.
+
+    If 'tutorialNote' == true, then the music note will ignore the player's input and play itself automatically.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

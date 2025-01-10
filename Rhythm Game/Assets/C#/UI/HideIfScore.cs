@@ -1,3 +1,7 @@
+/*
+    A script that changes an object's visibility depending on whether the player's score is > 0.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,7 @@
+/*
+    Displays the player's current score.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

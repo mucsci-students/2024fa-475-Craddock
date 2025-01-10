@@ -1,3 +1,7 @@
+/*
+    The FlyUp script is attached to any UI elements that need to fly offscreen when the game begins, and then reappear again when it stops.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,12 +23,12 @@ public class FlyUp : MonoBehaviour
         if (!up)
         {
             StartCoroutine ("CoroutineDown");
-            print ("down " + gameObject.name);
+            print ("down " + gameObject.name); //debug
         }
         else
         {
             StartCoroutine ("CoroutineUp");
-            print ("up " + gameObject.name);
+            print ("up " + gameObject.name); //debug
         }
     }
 

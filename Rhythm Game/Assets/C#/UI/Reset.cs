@@ -1,3 +1,7 @@
+/*
+    A class that is attached to the reset button, which resets the player's score and then disappears when it's pressed.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

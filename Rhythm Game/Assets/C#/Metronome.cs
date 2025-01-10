@@ -1,3 +1,10 @@
+/*
+    The Metronome class keeps track of the current beat, where 0 is the first beat, 1 is the second beat, etc.
+    The 'note' variable stores the current beat.
+
+    It also contains the player's current score, and it increases the tempo as the score increases.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +21,7 @@ public class Metronome : MonoBehaviour
         get { return tempo / 60f; }
     }
     public float note { get; private set; }
+
     float delayFromStart = 8f;
     [SerializeField] float timeOfSongStart = -4f;
     [SerializeField] SongPlayer player;

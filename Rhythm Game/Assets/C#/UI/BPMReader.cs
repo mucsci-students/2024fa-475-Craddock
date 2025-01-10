@@ -1,3 +1,7 @@
+/*
+    Displays the current BPM for the player.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

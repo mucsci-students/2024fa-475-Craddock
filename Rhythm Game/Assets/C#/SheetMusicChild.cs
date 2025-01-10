@@ -1,3 +1,7 @@
+/*
+    A class for GameObjects that are children of the sheet music controller. It deletes them after they move offscreen.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

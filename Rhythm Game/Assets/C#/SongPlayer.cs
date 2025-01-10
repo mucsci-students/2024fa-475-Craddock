@@ -1,3 +1,7 @@
+/*
+    The SongPlayer class starts the correct song playing whenever the game begins, using the Maestro MPTK.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +29,7 @@ public class SongPlayer : MonoBehaviour
     public void Begin ()
     {
         began = true;
-        print (song);
+        print (song); //debug
         player.MPTK_MidiName = song;
         player.MPTK_Play();
     }

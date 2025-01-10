@@ -1,3 +1,7 @@
+/*
+    The HideButton script is attached to any UI elements that need to have their visibility toggled on or off.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
